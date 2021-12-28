@@ -2,7 +2,7 @@
 
 ERRORTYPE='\033[0;31m';
 NE='\033[0m';
-PS3="DBMS-Project >";
+PS3="DBMS-Project > ";
 current=$PWD;
 
 if [ -d ./database ]
@@ -20,10 +20,11 @@ do
         case $selection in 
         "Create database")
                             echo "Creating database ..."
-                            ./scripts/createdb.sh
+                            . ./scripts/createdb.sh
                             ;;
         "List databases")
                             echo "Listing databases ..."
+                            . ./scripts/listdb.sh
                             ;;
         "Connect to database")
                             echo "Connecting to database ..."
