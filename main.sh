@@ -12,7 +12,7 @@ fi
 
 while [ true ]
 do 
-    `cd $current` #Going to current path of the main script
+    `cd $current` 
     select selection in "Create database" "List databases" "Connect to database" "Drop database" "Exit"
     do
         case $selection in 
