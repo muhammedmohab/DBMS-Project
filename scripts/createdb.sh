@@ -4,7 +4,7 @@ read db_name;
 
 if [ -d ./database/$db_name ]
 then 
-    echo "${ERRORTYPE}$db_name DATABASE exist${NE}"
+    echo -e "${ERRORTYPE}$db_name DATABASE exist${NE}"
     . ./main.sh
 else
     mkdir ./database/$db_name
