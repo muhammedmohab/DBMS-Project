@@ -1,6 +1,7 @@
 #! /bin/bash
 
-ERRORTYPE='\033[0;31m'
+ERRORTYPE='\033[0;31m';
+NE='\033[0m';
 PS3="DBMS-Project >";
 current=$PWD;
 
@@ -34,7 +35,7 @@ do
                             echo "Exiting ..."
                             exit ;;
         *)
-                            echo "Wrong Entery"
+                            echo -e "${ERRORTYPE}Wrong Entery${NE}"
                             ;;
 
         esac
