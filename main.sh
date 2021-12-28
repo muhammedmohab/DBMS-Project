@@ -28,9 +28,11 @@ do
                             ;;
         "Connect to database")
                             echo "Connecting to database ..."
+                            . ./scripts/connectdb.sh
                             ;;
         "Drop database")
                             echo "Dropping database ..."
+                            . ./scripts/dropdb.sh
                             ;;
         "Exit")
                             echo "Exiting ..."
