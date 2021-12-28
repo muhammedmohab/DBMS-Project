@@ -1,10 +1,13 @@
 #!/usr/bin/bash
-echo enter your database name;
+echo "Enter your database name: "
 read db_name;
-if [ -d ~/DBMS-Project/database/$db_name; ]
+
+if [ -d ./database/$db_name ]
 then 
-echo this DATABASE exist;
-./~/DBMS-Project/database/main.sh;
+    echo "$db_name DATABASE exist"
+    exit;
 else
-mkdir ~/DBMS-Project/database/$db_name;
+    mkdir ./database/$db_name
+    echo "$db_name Database created";
+    exit;
 fi
