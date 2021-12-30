@@ -1,4 +1,5 @@
 #! /bin/bash
+
 echo "Enter your database name: "
 read db_name;
 

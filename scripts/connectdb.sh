@@ -9,8 +9,9 @@ then
     # echo $PWD
     echo "You're in ${database}"
     PS3="DBMS($database)-> "
-    . ../../scripts/insertcase.sh
-    
+    . ../../scripts/submenu.sh
+
+    #. ../../scripts/insertcase.sh    
     #. ../../scripts/sqldb.sh
 else
     echo -e "${ERRORTYPE}Database $database doesn't exists${NE}"
