@@ -6,7 +6,7 @@ read database;
 if [[ -d ./database/$database ]]
 then
     cd ./database/$database
-    echo $PWD
+    # echo $PWD
     echo "You're in ${database}"
     PS3="DBMS($database)-> "
     . ../../scripts/insertcase.sh
