@@ -7,7 +7,4 @@ id int pk,name string,salary int
 6,mohamed,2000
 7,hady,2000
 8,hadeer,456
-<<<<<<< HEAD
 9,gameel,2000
-=======
->>>>>>> f8b4907d13a238cf53f612584363ce40d1359703
