@@ -21,24 +21,29 @@ do
         "Create database")
                             echo "Creating database ..."
                             . ./scripts/createdb.sh
+                            break
                             ;;
         "List databases")
                             echo "Listing databases ..."
                             . ./scripts/listdb.sh
+                            break
                             ;;
         "Connect to database")
                             echo "Connecting to database ..."
                             . ./scripts/connectdb.sh
+                            break
                             ;;
         "Drop database")
                             echo "Dropping database ..."
                             . ./scripts/dropdb.sh
+                            break
                             ;;
         "Exit")
                             echo "Exiting ..."
                             exit ;;
         *)
-                            echo -e "${ERRORTYPE}Wrong Entery${NE}"
+                            echo -e "${ERRORTYPE}Wrong Entery, Try again!${NE}"
+                            break
                             ;;
 
         esac

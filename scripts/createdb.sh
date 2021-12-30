@@ -11,5 +11,6 @@ else
     echo "$db_name Database created";
     cd ./database/$db_name
     echo "Using $db_name"
-    . ../../scripts/sqldb.sh
+    . ../../scripts/submenu.sh
+    #. ../../scripts/sqldb.sh
 fi

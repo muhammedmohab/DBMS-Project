@@ -9,37 +9,46 @@ do
         "Create table")
                             echo "Creating table ..."
                             . ../../scripts/createtable.sh
+                            break
                             ;;
         "List tables")
                             echo "Listing tables ..."
                             . ../../scripts/listtable.sh
+                            break
                             ;;
         "Drop table")
                             echo "Dropping table ..."
                             . ../../scripts/droptable.sh
+                            break
                             ;;
         "Insert into table")
                             echo "Inserting into table ..."
                             . ../../scripts/inserttable.sh
+                            break
                             ;;
         "Select from table")
                             echo "Selecting from table ..."
                             . ../../scripts/selecttable.sh
+                            break
                             ;;
         "Delete from table")
                             echo "Deleting from table ..."
                             . ../../scripts/deletetable.sh
+                            break
                             ;;
         "Update table")
                             echo "Updating table ..."
                             . ../../scripts/updatetable.sh
+                            break
                             ;;
         "Use SQL")
                             echo "Using SQL"
                             . ../../scripts/sqldb.sh
+                            break
                             ;;
         "Back")
                             echo "Backing ... "
+                            cd ../..
                             break 2
                             ;;
         *)
