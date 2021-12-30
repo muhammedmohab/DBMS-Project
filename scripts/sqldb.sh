@@ -7,14 +7,15 @@ echo "Enter SQL Statment";
 read sql;
 line=($sql); #Taking a whole SQL steatment and covert it to array
 
-# create table table_name (id int)
-if [[ ${line[0]^^} = "CREATE" && ${line[1]^^} = "TABLE" && ${line[3]} = "(" && ${line[-1]} = ")" ]]
+# create table table_name ( id int )
+if [[ ${line[0]^^} = "CREATE" && ${line[1]^^} = "TABLE" && ${line[3]:0:1} = "(" && ${line[-1]} = ")" ]]
 then
     if [[ -f ${line[2]}.csv ]] 
     then
         echo "The Table ${line[2]} already exists"
-    else 
+    else
         touch ${line[2]}.csv
+        . ../../scripts/cutsql.sh
     fi
 
 # show tables
@@ -104,8 +105,7 @@ then
     fi
 elif [[ ${line[0]^^} = "BACK" ]]
 then
-    cd ..
-    . ./main
+    break
 
 else
     echo -e "${ERRORTYPE}Wrong SQL Statment${NE}"
