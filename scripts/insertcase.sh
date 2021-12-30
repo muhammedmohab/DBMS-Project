@@ -1,26 +1,27 @@
 #! /bin/bash
-echo enter TABLE name 
-read table_name
-line=`cat $table_name | head -1`
+echo "Enter table name" 
+read table_name;
+
+line=`cat ${table_name}.csv | head -1` #Reading the first line which has the cols
 IFS=","; read -ra items <<< "$line"
-n=${#items[@]}
-i=0
-while [ $n -gt 0 ]
+
+numberOfCols=${#items[@]} #number of cols to loop on
+counter=0
+while [ $numberOfCols -gt 0 ]
 do
-echo ${items[$i]}
-read value
-echo -n $value >> $table_name
-if [ $n -ne 1 ]
-then
-echo -n , >> $table_name
-fi
-if [ $n -eq 1 ]
-then 
-echo "">> $table_name
-fi 
-((n=$n-1))
-((i=$i+1))
-
+    echo "${items[$counter]}"
+    read value
+    echo -n $value >> ${table_name}.csv
+    if [ $numberOfCols -ne 1 ]
+    then
+        echo -n , >> ${table_name}.csv
+    fi
+    
+    if [ $numberOfCols -eq 1 ]
+    then 
+        echo "">> ${table_name}.csv
+    fi 
+    ((numberOfCols=$numberOfCols-1))
+    ((counter=$counter+1))
 done
-
-
+    cd ../.. #Taking the path to the main script path
