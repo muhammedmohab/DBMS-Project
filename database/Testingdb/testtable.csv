@@ -1,2 +1,9 @@
-id,name,salary
-1,mo,1500
+id int pk,name string,salary int
+1,mohamed,20
+2,ahmed,30
+3,kamel,1555
+4,kamaal,568
+5,,
+6,mohamed,2000
+7,hady,2000
+8,hadeer,456
