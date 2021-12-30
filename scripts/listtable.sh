@@ -1,8 +1,10 @@
 #! /bin/bash
-echo $PWD
-if [[ -n "$(ls)" ]]
+
+files=database/*
+
+if [[ ${#files} -gt 0 ]]
 then
-    ls $database
+    ls 
 else
     echo -e "${ERRORTYPE}Couldn't fetch tables from $database ${NE}";
 fi
