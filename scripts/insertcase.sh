@@ -2,7 +2,7 @@
 echo "Enter table name" 
 read table_name;
 
-if [ -f "$table_name" ]
+if [ -f "${table_name}.csv" ]
 then
 	line=`cat ${table_name}.csv | head -1` #Reading the first line which has the cols
     IFS=","; read -ra items <<< "$line"
@@ -28,6 +28,6 @@ then
 done
     cd ../.. #Taking the path to the main script path
 else
-    echo -e "${ERRORTYPE}Table is not found{$NE}";
+    echo -e "${ERRORTYPE}Table is not found${NE}";
     cd ../.. #Taking the path to the main script path
 fi
