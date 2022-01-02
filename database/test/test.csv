@@ -1,0 +1,3 @@
+id int pk, name varchar
+1,ahmed
+2,mohamed

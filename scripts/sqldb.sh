@@ -52,7 +52,8 @@ elif [[ ${line[0]^^} = "SELECT" && ${line[1]} = "*" && ${line[2]^^} = "FROM" && 
 then
     if [[ -f ${line[3]}.csv ]]
     then 
-        echo "Listing all columns" #Should be replaced with the listing columns command
+        echo "Listing all columns"
+        . ../../scripts/selectallsql.sh
     else
         echo -e "${ERRORTYPE}Table ${line[3]} is not found${NE}"
     fi
