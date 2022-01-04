@@ -2,4 +2,8 @@
 
 input=${line[@]}
 
-echo "$input" | cut -d "(" -f2 | cut -d ")" -f1 > ${line[2]}.csv # id int, name char
+insidep=$(echo "$input" | cut -d "(" -f2 | cut -d ")" -f1) # id int, name char
+
+insidep="${insidep:1:-1}"; #Removes the first and last letter which are spaces.
+
+echo "$insidep" > ${line[2]}.csv;

@@ -16,6 +16,7 @@ then
     else
         touch ${line[2]}.csv
         . ../../scripts/cutsql.sh
+        echo "Table has been created"
     fi
 
 # show tables
@@ -35,12 +36,13 @@ then
         echo -e "${ERRORTYPE}Table ${line[2]} not found${NE}"
     fi
 
-    # insert into table_name values (v1,v2,v3) 
+    # insert into table_name values ( v1,v2,v3 ) 
 elif [[ ${line[0]^^} = "INSERT" && ${line[1]^^} = "INTO" && ${line[3]^^} = "VALUES" && ${line[4]} = "(" && ${line[-1]} = ")" ]]
 then
     if [[ -f ${line[2]}.csv ]]
     then 
-        echo "File exists" #Should be replaced with inserting commands
+        . ../../scripts/insertsql.sh #calling the insert file which cuts and adds the vales.
+        echo "Values have been inserted"
     else
         echo -e "${ERRORTYPE}Table ${line[2]} is not found${NE}"
     fi
@@ -50,7 +52,8 @@ elif [[ ${line[0]^^} = "SELECT" && ${line[1]} = "*" && ${line[2]^^} = "FROM" && 
 then
     if [[ -f ${line[3]}.csv ]]
     then 
-        echo "Listing all columns" #Should be replaced with the listing columns command
+        echo "Listing all columns"
+        . ../../scripts/selectallsql.sh
     else
         echo -e "${ERRORTYPE}Table ${line[3]} is not found${NE}"
     fi
