@@ -1,6 +1,7 @@
 #! /bin/bash
 
 ERRORTYPE='\033[0;31m';
+CYAN='\033[0;36m';
 NE='\033[0m';
 PS3="DBMS-Project > ";
 current=$PWD;
