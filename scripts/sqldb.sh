@@ -74,7 +74,7 @@ elif [[ ${line[0]^^} = "DELETE" && ${line[1]^^} = "FROM" && ${line[3]^^} != "WHE
 then
     if [[ -f ${line[2]}.csv ]]
     then 
-        . ../../scripts/deletesql.sh
+        . ../../scripts/deletefromsql.sh
         echo "Delted sucessfully" #Insert delete command
     else
         echo -e "${ERRORTYPE}Table ${line[2]} is not found${NE}"
