@@ -74,19 +74,21 @@ elif [[ ${line[0]^^} = "DELETE" && ${line[1]^^} = "FROM" && ${line[3]^^} != "WHE
 then
     if [[ -f ${line[2]}.csv ]]
     then 
-        echo "Delte commands" #Insert delete command
+        . ../../scripts/deletesql.sh
+        echo "Delted sucessfully" #Insert delete command
     else
         echo -e "${ERRORTYPE}Table ${line[2]} is not found${NE}"
     fi
 
-    #delete something from table_name where condition = something;
-elif [[ ${line[0]^^} = "DELETE" && ${line[2]^^} = "FROM" && ${line[4]^^} = "WHERE" && ${line[6]} = "=" ]]
+    #delete from table_name where condition = something;
+elif [[ ${line[0]^^} = "DELETE" && ${line[1]^^} = "FROM" && ${line[3]^^} = "WHERE" && ${line[5]} = "=" ]]
 then
-    if [[ -f ${line[3]}.csv ]]
+    if [[ -f ${line[2]}.csv ]]
     then
-        echo "Delete commands with condition" #Insert delete command
+        . ../../scripts/deletefromsql.sh
+        echo "Deleted sucessfully" #Insert delete command
     else
-        echo -e "${ERRORTYPE}Table ${line[3]} is not found${NE}"
+        echo -e "${ERRORTYPE}Table ${line[2]} is not found${NE}"
     fi
 
     #update table_name set col = something;
