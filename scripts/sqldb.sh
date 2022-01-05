@@ -63,7 +63,8 @@ elif [[ ${line[0]^^} = "SELECT" && ${line[2]^^} = "FROM" && ${line[4]^^} = "WHER
 then
     if [[ -f ${line[3]}.csv ]]
     then 
-        echo "Selecting commands of ${line[1]} from where ${line[5]} = ${line[7]} " #Insert the select commands
+        #echo "Selecting commands of ${line[1]} from where ${line[5]} = ${line[7]} " #Insert the select commands
+        . ../../scripts/selectsql.sh
     else
         echo -e "${ERRORTYPE}Table ${line[3]} is not found${NE}"
     fi
