@@ -1,12 +1,6 @@
-id int pk, name string
-55555555555,new
-3,mahmoud
-4,asdf
-5,asdf
-160,asdfah
-454515,faergsth
-1649,arjtyk
-1,asdf
-1,asdf
-1,asdg
-1,eryr
+id int pk, name string,salary int
+1,HEHE,5000
+44,mo,400
+44,mo,2
+3,adsf,55
+4,hamdy,9000
