@@ -11,9 +11,11 @@ then
     colxfound="";
     firstline=`cat ${table_name}.csv | head -1`
     fid=0; #The filed to change
+    pkid=0;
 
     IFS=","; read -ra items <<< "$firstline" #items[0]=field 1 .. etc
     size=${#items[@]}; #size of the table header items
+    sizeinloop=$size;
 
     echo "Enter where condition column name"
     read colx;
@@ -21,10 +23,10 @@ then
     while [[ size -gt 0 ]]
     do
         line=${items[$i]}; #line = id, name , salary every itteration
-        
-
         IFS=" "; read -ra cols <<< "$line"
+
         ((i=$i+1))
+        
         colxfound=${cols[0]}; # id, name, salary
         ####id = id
 
@@ -50,11 +52,45 @@ then
                     j=0
                     sizeloop=${#update_numbers[@]}
                    
+                ###########################################
+                for((cc=0;cc<sizeinloop;cc++))
+                do
+                    line2=${items[$cc]};
+                    IFS=" "; read -ra colz <<< "$line2"
+                    if [[ ${#colz[@]} -gt 2 ]]
+                    then
+                        ((pkid=$cc+1)); #primary key field number;
+                    fi
+
+                done
+                cre=`cat ${table_name}.csv | awk 'NR>1' |cut -d, -f$pkid`
+                IFS=$'\n' read -rd '' -a pks <<<"$cre"
+                pk_size=${#pks[@]}
+                count=0
+                kk=0
+                while [[ pk_size -gt 0 ]]
+                do
+                    if [[ ${pks[kk]} == $new_value ]]
+                    then 
+                        ((count=$count+1)) 
+                        #Change in counter if counter=0 then it's not pk if counter=anything then it's dublicate value;
+                    fi
+                    ((kk=$kk+1))
+                    ((pk_size=$pk_size-1))
+                done
+
+                #############################################
                     while [[ sizeloop -gt 0 ]]
                     do 
-                        awk -F "," 'FNR=='${update_numbers[j]}'{$'$i'="'${new_value}'"}1' OFS="," ${table_name}.csv > .${table_name}.csv && mv .${table_name}.csv ${table_name}.csv
-                        ((j=$j+1))
-                        ((sizeloop=$sizeloop-1))
+                        if [[ $count == 0 ]]
+                        then
+                            awk -F "," 'FNR=='${update_numbers[j]}'{$'$i'="'${new_value}'"}1' OFS="," ${table_name}.csv > .${table_name}.csv && mv .${table_name}.csv ${table_name}.csv
+                            ((j=$j+1))
+                            ((sizeloop=$sizeloop-1))
+                        else
+                            echo -e "${ERRORTYPE}Value is dublicated in pk${NE}";
+                            break;
+                        fi
                     done
                     echo "Updated!"
                     
