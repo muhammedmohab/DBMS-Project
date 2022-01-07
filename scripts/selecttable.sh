@@ -204,6 +204,8 @@ then
 
 
             break;
+        else 
+            echo -e "${ERRORTYPE}Incorret${NE}" 
         fi #closing of selection of not all
         
         ((size=$size-1)) #while loop condition

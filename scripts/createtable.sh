@@ -1,5 +1,6 @@
 #! /bin/bash
 i=1
+flag=0;
 
 echo "Enter table name" 
 read table_name;
@@ -13,23 +14,39 @@ else
   echo "Enter the number of columns"
   read number
   
-  while [[ number -gt 0 ]]
+  while [[ $number -gt 0 ]]
   do 
     echo "enter the column number $i"
     read column
+    IFS=" "; read -ra colspaced <<< "$column"
+    size=${#colspaced[@]};
 
-    echo -n $column >> ${table_name}.csv
+    if [[ $size -gt 2 ]]
+    then
+        flag=1;
+    fi
+    if [[ ${colspaced[1]} == "int" || ${colspaced[1]} == "string" && $flag == 0 ]]
+    then
 
-      if [[ $number -ne 1 ]]
-      then
-        echo -n , >> ${table_name}.csv
+        echo -n $column >> ${table_name}.csv
+        if [[ $number -ne 1 ]]
+        then
+          echo -n , >> ${table_name}.csv
+        fi
+
+        if [[ $number -eq 1 ]]
+        then 
+          echo "">> ${table_name}.csv
+        fi
+        ((number=$number-1))
+        ((i=$i+1))
+    else
+        if [[ $size -gt 2 && $flag == 1 ]]
+        then
+          echo -e "${ERRORTYPE}Only one PK in table${NE}";
+        else
+          echo -e "${ERRORTYPE}Wrong data type (int|string)${NE}";
+        fi
       fi
-
-      if [[ $number -eq 1 ]]
-      then 
-        echo "">> ${table_name}.csv
-      fi
-      ((number=$number-1))
-      ((i=$i+1))
   done
 fi

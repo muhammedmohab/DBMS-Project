@@ -5,6 +5,7 @@ while [ true ]
 do  
     select subselection in "Create table" "List tables" "Drop table" "Insert into table" "Select from table" "Delete from table" "Update table" "Use SQL" "Back"
     do
+        sleep 1;clear;
         case $subselection in 
         "Create table")
                             echo "Creating table ..."

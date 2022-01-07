@@ -18,6 +18,7 @@ do
     `cd $current` 
     select selection in "Create database" "List databases" "Connect to database" "Drop database" "Exit"
     do
+        sleep 1; clear;
         case $selection in 
         "Create database")
                             echo "Creating database ..."

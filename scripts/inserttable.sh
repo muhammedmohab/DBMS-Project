@@ -39,30 +39,44 @@ fi
 #$temp=`tail -2 ${table_name}.csv | cut -d, -f$j`
 while [ true ]
 do
-echo ${each_col[0]}
+echo "Enter value of: ${each_col[0]}"
 #echo $j
 ####################### to check for last id value 
-if [[ $i -eq 0 ]]
-then
-temp2=`tail -1 ${table_name}.csv | cut -d, -f$j`
-else 
-temp2=`tail -2 ${table_name}.csv | cut -d, -f$j`
-fi 
+# if [[ $i -eq 0 ]]
+# then
+# temp2=`tail -1 ${table_name}.csv | cut -d, -f$j`
+# else 
+# temp2=`tail -2 ${table_name}.csv | cut -d, -f$j`
+# fi 
 
-if [[ $temp2 =~ ^[+-]?[0-9]+$ ]]
-then
-echo  the last PK value is $temp2
-else echo the last PK value is 0
-fi
+# if [[ $temp2 =~ ^[+-]?[0-9]+$ ]]
+# then
+# echo  the last PK value is $temp2
+# else echo the last PK value is 0
+# fi
 #####################
 read value
 if [ ${each_col[1]} == "int" ]
 then
 if [ -z $value ]
 then 
-echo -e "${ERRORTYPE}shouldn't be empty  NUMBER${NE}"
+echo -e "${ERRORTYPE}shouldnt be empty int${NE}"
 else 
-if [[ $value =~ ^[+-]?[0-9]+$ && $value > $temp ]] #check for integer [0-9]
+cre=`cat ${table_name}.csv | awk 'NR>1' |cut -d, -f$j`
+IFS=$'\n' read -rd '' -a pks <<<"$cre"
+pk_size=${#pks[@]}
+count=0
+kk=0
+while [[ $pk_size -gt 0 ]]
+do
+if [[ ${pks[$kk]} -eq $value ]]
+then 
+((count=$count+1))
+fi
+((kk=$kk+1))
+((pk_size=$pk_size-1))
+done
+if [[ $value =~ ^[+-]?[0-9]+$ && $count -eq 0 ]] #check for integer [0-9]
 then
 ##############################
 echo -n $value >> ${table_name}.csv
@@ -82,12 +96,27 @@ fi
 fi 
 elif [ ${each_col[1]} == "string" ]
 then 
-if [[ -z $value ]]
+cre=`cat ${table_name}.csv | awk 'NR>1' |cut -d, -f$j`
+IFS=$'\n' read -rd '' -a pks <<<"$cre"
+pk_size=${#pks[@]}
+count=0
+kk=0
+while [[ $pk_size -gt 0 ]]
+do
+if [[ ${pks[$kk]} == $value ]]
 then 
-echo -e "${ERRORTYPE}shouldn't be empty string${NE}"
+((count=$count+1))
+fi
+((kk=$kk+1))
+((pk_size=$pk_size-1))
+done
+if [[ -z $value || $count -ne 0 ]]
+then 
+echo "shouldnt be empty string or value should be unique"
 else
 echo -n $value >> ${table_name}.csv
-#to save the value 
+#to save the value
+
 if [ $size -ne 1 ]
 then
 echo -n , >> ${table_name}.csv
@@ -110,7 +139,7 @@ if [ ${#each_col[@]} -eq 2 ]
 then
 while [ true ]
 do
-echo ${each_col[0]}
+echo "Enter the value of: ${each_col[0]}"
 read value
 if [ ${each_col[1]} == "int" ]
 then
@@ -129,7 +158,7 @@ echo "">> ${table_name}.csv
 fi 
 break
 else 
-echo -e "${ERRORTYPE}Table is not NUMBER${NE}"
+echo -e "${ERRORTYPE}$value is not a NUMBER${NE}"
 fi
 
 elif [ ${each_col[1]} == "string" ]

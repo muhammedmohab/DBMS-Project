@@ -43,7 +43,7 @@ then
             
             if [[ $NR == "" ]]
             then
-                echo -e "${ERRORTYPE}Not in table${NE}"
+                echo -e "${ERRORTYPE}Not in table or Empty${NE}"
             else
                     echo "Enter the new value of ${col_name}";
                     read new_value;
