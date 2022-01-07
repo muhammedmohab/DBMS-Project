@@ -48,7 +48,7 @@ then
     fi
 
     #select * from table (without where conditions)
-elif [[ ${line[0]^^} = "SELECT" && ${line[1]} = "*" && ${line[2]^^} = "FROM" && ${line[4]^^} != "WHERE" ]]
+elif [[ ${line[0]^^} = "SELECT" && ${line[1]} = "all" && ${line[2]^^} = "FROM" && ${line[4]^^} != "WHERE" ]]
 then
     if [[ -f ${line[3]}.csv ]]
     then 
