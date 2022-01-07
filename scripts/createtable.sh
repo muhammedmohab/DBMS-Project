@@ -20,13 +20,14 @@ else
     read column
     IFS=" "; read -ra colspaced <<< "$column"
     size=${#colspaced[@]};
-
-    if [[ $size -gt 2 ]]
+    #echo "${size}, ${flag}"
+    if [[ (${colspaced[1]} == "int" || ${colspaced[1]} == "string") && $flag == 0 ]]
     then
-        flag=1;
-    fi
-    if [[ ${colspaced[1]} == "int" || ${colspaced[1]} == "string" && $flag == 0 ]]
-    then
+        if [[ $size == 3 ]]
+        then
+            flag=1;
+            #echo "Flag changed"
+        fi
 
         echo -n $column >> ${table_name}.csv
         if [[ $number -ne 1 ]]
