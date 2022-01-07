@@ -1,6 +1,7 @@
-id int pk, name string,salary int
+id int pk,name string,salary int
 1,HEHE,5000
-44,mo,400
-44,mo,2
-3,adsf,55
-4,hamdy,9000
+2,mo,1
+5,mo,2
+6,mo,15648
+3,dodo,55
+4,hamdysan,9000

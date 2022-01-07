@@ -5,13 +5,10 @@ read table_name;
 if [[ -f "${table_name}.csv" ]] # if file exist then continue 
 then
 
-#! /bin/bash
-
-
 line=`cat ${table_name}.csv | head -1`
-IFS=","; read -ra items <<< "$line" 
+IFS=","; read -ra items <<< "$line" #all cols
 
-size=${#items[@]}
+size=${#items[@]} #columns size
 i=0
 j=1
 
@@ -33,7 +30,7 @@ fi
 
 if [[ $temp =~ ^[+-]?[0-9]+$ ]]
 then
-  :
+  : #skip
  else
  temp=0
 fi
